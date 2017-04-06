@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="Palenew的博客"><meta name="keywords" content="blog, javascript, Palenew, pale_blue"><title>webpack入门（二） | Welcome to My Blog</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.3.0"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=1.3.0"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">webpack入门（二）</h1><a id="logo" href="/.">Welcome to My Blog</a><p class="description">by Palenew</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">webpack入门（二）</h1><div class="post-meta">Apr 6, 2017<script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><h3 id="webpack-source-maps"><a href="#webpack-source-maps" class="headerlink" title="webpack   source maps"></a>webpack   source maps</h3><p>Webpack在打包时可以为我们生成的source maps，这为我们提供了一种对应编译文件和源文件的方法，使得编译后的代码可读性更高，也更容易调试。</p>
+<p>在webpack的配置文件中配置source maps，需要配置devtool，它有以下四种不同的配置选项，各具优缺点，描述如下：</p>
+<table>
+<thead>
+<tr>
+<th>devtool选项</th>
+<th>配置结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>source-map</td>
+<td>在一个单独的文件中产生一个完整且功能完全的文件。这个文件具有最好的source map，但是它会减慢打包文件的构建速度；</td>
+</tr>
+<tr>
+<td>cheap-module-source-map</td>
+<td>在一个单独的文件中生成一个不带列映射的map，不带列映射提高项目构建速度，但是也使得浏览器开发者工具只能对应到具体的行，不能对应到具体的列（符号），会对调试造成不便；</td>
+</tr>
+<tr>
+<td>eval-source-map</td>
+<td>使用eval打包源文件模块，在同一个文件中生成干净的完整的source map。这个选项可以在不影响构建速度的前提下生成完整的sourcemap，但是对打包后输出的JS文件的执行具有性能和安全的隐患。不过在开发阶段这是一个非常好的选项，但是在生产阶段一定不要用这个选项；</td>
+</tr>
+<tr>
+<td>cheap-module-eval-source-map</td>
+<td>这是在打包文件时最快的生成source map的方法，生成的Source Map 会和打包后的JavaScript文件同行显示，没有列映射，和eval-source-map选项具有相似的缺点；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="配置到webpack-config-js中"><a href="#配置到webpack-config-js中" class="headerlink" title="配置到webpack.config.js中"></a>配置到webpack.config.js中</h3><pre><code>devtool: &apos;eval-source-map&apos;,//配置生成Source Maps，选择合适的选项
+</code></pre><h2 id="使用webpack构建本地服务器"><a href="#使用webpack构建本地服务器" class="headerlink" title="使用webpack构建本地服务器"></a>使用webpack构建本地服务器</h2><p>首先要安装依赖：</p>
+<pre><code>npm install --save-dev webpack-dev-server
+</code></pre><table>
+<thead>
+<tr>
+<th>devserver配置选项</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>contentBase</td>
+<td>默认webpack-dev-server会为根文件夹提供本地服务器，如果想为另外一个目录下的文件提供本地服务器，应该在这里设置其所在目录（本例设置到“public”目录）</td>
+</tr>
+<tr>
+<td>port</td>
+<td>设置默认监听端口，如果省略，默认为”8080“</td>
+</tr>
+<tr>
+<td>inline</td>
+<td>设置为true，当源文件改变时会自动刷新页面</td>
+</tr>
+<tr>
+<td>colors</td>
+<td>设置为true，使终端输出的文件为彩色的</td>
+</tr>
+<tr>
+<td>historyApiFallback</td>
+<td>在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html</td>
+</tr>
+</tbody>
+</table>
+<pre><code>devServer: {
+    contentBase: &quot;./public&quot;,//本地服务器所加载的页面所在的目录
+    colors: true,//终端中输出结果为彩色
+    historyApiFallback: true,//不跳转
+    inline: true//实时刷新
+  } 
+</code></pre><h2 id="Loaders"><a href="#Loaders" class="headerlink" title="Loaders"></a>Loaders</h2><pre><code>module: { //在配置文件里添加JSON loader
+    loaders: [
+        {
+            test: /\.json$/,
+            loader: &quot;json&quot;
+        }
+    ]
+},
+</code></pre><h2 id="node-js语法相关"><a href="#node-js语法相关" class="headerlink" title="node.js语法相关"></a>node.js语法相关</h2><pre><code>// 这个js是index的实际js逻辑
+var note = require( &apos;../note/vue_tab.md&apos; );
+var $ = require(&apos;jquery&apos;);
+module.exports = function() {
+    var temp = document.createElement(&apos;div&apos;);
+    $(temp).css({&apos;max-width&apos;:&apos;1040px&apos;,&apos;margin&apos;:&apos;14px auto&apos;});
+    $(temp).append( &apos;&lt;p&gt;采用webpack加载的text_demo模块&lt;/p&gt;&apos; );
+    $(temp).append( require( &apos;../note/webpack_build.md&apos; ) );
+    $(temp).append( require( &apos;../note/webpack_extend.md&apos; ) );
+    $(temp).append( note );
+    return temp;
+};
+</code></pre><p>我可以按照规矩在模块中尽情使用require来引用别的模块（也就是文件）。<br>需要注意的是，要在webpack.config.js中添加loaders支持文件格式。<br>而第三方的插件，像是jq，只需要在npm中安装依赖，然后不需要写路径，直接引用。</p>
+</div><div class="tags"><a href="/tags/webpack/">webpack</a></div><div class="post-nav"><a href="/2017/04/06/webpack入门（一）/" class="pre">webpack入门（一）</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="widget"><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="请输入关键字..."/></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/bug/" style="font-size: 15px;">bug</a> <a href="/tags/input标签/" style="font-size: 15px;">input标签</a> <a href="/tags/空隙/" style="font-size: 15px;">空隙</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-fei"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/webpack入门（二）/">webpack入门（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/webpack入门（一）/">webpack入门（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/span中的input标签上面有几个小像素空隙/">span中的input标签上面有几个小像素空隙</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/如何使用-hexo-git-创建自己的博客/">如何使用 hexo + git 创建自己的博客</a></li></ul></div></div></div></div><a id="totop" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.3.0" async></script><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">网站地图</a> |<a href="/atom.xml">订阅本站</a> |<span>联系博主：<a href="mailto:yanchongshan8@foxmail.com" target="_blank" class="fa fa-email"> </a><a href="undefined" target="_blank" class="fa fa-weibo"></a><a href="https://github.com/Palenew" target="_blank" class="fa fa-github"> </a></span></p><p><span> Copyright &copy;<a href="/." rel="nofollow">Palenew</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span><span><a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> Theme </a>by<a rel="nofollow" target="_blank" href="https://github.com/chaooo"> Charles.</a></span></p></div></div></div><script type="text/javascript" src="/js/search.json.js?v=1.3.0"></script></body></html>
