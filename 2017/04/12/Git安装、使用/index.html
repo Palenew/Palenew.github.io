@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="Palenew的博客"><meta name="keywords" content="blog, javascript, Palenew, pale_blue"><title>Git安装、使用 | Welcome to My Blog</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.3.0"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=1.3.0"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Git安装、使用</h1><a id="logo" href="/.">Welcome to My Blog</a><p class="description">by Palenew</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">Git安装、使用</h1><div class="post-meta">Apr 12, 2017<span> | </span><span class="category"><a href="/categories/git/">git</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><h3 id="Git的安装"><a href="#Git的安装" class="headerlink" title="Git的安装"></a>Git的安装</h3><ul>
+<li><p>下载地址：<br><a href="https://git-for-windows.github.io/" target="_blank" rel="external">https://git-for-windows.github.io/</a></p>
+</li>
+<li><p>安装</p>
+<ul>
+<li>安装之后，开始目录可以找到 git 文件夹，里面有个叫 <code>git bash</code> 的，那个就是 git 的命令窗口。</li>
+<li>默认在资源管理器中右键也会有 <code>Git GUI</code> 和 <code>Git Bash</code> 选项。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>git 的命令窗口初学者用起来并不舒服，所以还需要一个Tortoise git。<br><a href="https://tortoisegit.org/download/" target="_blank" rel="external">https://tortoisegit.org/download/</a><br>网页上还有汉化包，一同下载，顺序安装即可。<br>安装后右键可以看到Tortoise git的三个命令。</p>
+</li>
+<li><p>或者也有很多其他的Git的管理工具，不如 SourceTree 。<br><a href="https://www.sourcetreeapp.com/" target="_blank" rel="external">https://www.sourcetreeapp.com/</a></p>
+</li>
+</ul>
+<h3 id="设置ssh"><a href="#设置ssh" class="headerlink" title="设置ssh"></a>设置ssh</h3><ul>
+<li><p>设置Git的user name和email：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name &quot;名称&quot;</div><div class="line">$ git config --global user.email &quot;邮箱&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>生成密钥</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C &quot;邮箱&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>之后会要求你填写一些描述信息，可以都不填，回车。<br>生成的密钥的位置在<code>C:\Users\你的计算机用户名\.ssh</code>，其中的 id_rsa.pub ，公钥就是我们需要的。</p>
+<ul>
+<li><p>设置密钥</p>
+<ul>
+<li><p>git（如图位置–新建–将id_rsa.pub的内容复制进去）<br><img src="http://palenew.oss-cn-shanghai.aliyuncs.com/hexo/git/ssh_1.png" alt=""><br><img src="http://palenew.oss-cn-shanghai.aliyuncs.com/hexo/git/ssh_2.png" alt=""></p>
+</li>
+<li><p>coding（类似git也是复制进去添加即可）<br><img src="http://palenew.oss-cn-shanghai.aliyuncs.com/hexo/git/ssh_3.png" alt=""></p>
+</li>
+<li><p><font color="red"><strong>注意事项</strong></font><br>犹豫默认的Tortoise git会使用它默认的方式加密，并不会读取本地的刚才添加的ssh文件，所以Tortoise git也需要改一下设置。<br><font color="red"><strong>setting中</strong></font><br><img src="http://palenew.oss-cn-shanghai.aliyuncs.com/hexo/git/TortoiseGit_ssh_set.png" alt=""><br>对应图片改动下ssh采用的程序，改为git的ssh.exe</p>
+</li>
+<li><p>设置密钥就完成了，以后 pull（拉取）、push（推送）就不必输入账户密码，之间的通讯认证就自己完成了。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="clone，将远程库的代码down下来"><a href="#clone，将远程库的代码down下来" class="headerlink" title="clone，将远程库的代码down下来"></a>clone，将远程库的代码down下来</h3><ul>
+<li><p>当远程库已经存在了，不论是 git 还是 coding 都提供一个 clone 地址。<br>  <img src="http://palenew.oss-cn-shanghai.aliyuncs.com/hexo/git/clone_git.png" alt=""><br>  <img src="http://palenew.oss-cn-shanghai.aliyuncs.com/hexo/git/clone_coding.png" alt=""></p>
+</li>
+<li><p>获取到地址后，右键 Git Clone 命令，填入地址就可以把远程库中的文件down下来了了。</p>
+</li>
+</ul>
+<h3 id="基础使用-pull-commit-push"><a href="#基础使用-pull-commit-push" class="headerlink" title="基础使用 pull commit push"></a>基础使用 pull commit push</h3><ul>
+<li><p>pull，拉取<br>拉取命令是更新本地工作目录的代码，也就是把远程库最新的代码更新下来。<br>在推送的时候要更新下远端代码再推送。</p>
+</li>
+<li><p>commit，提交<br>不同于SVN，git除了工作库和远端库以外，还有缓存库，commit是把代码提交到了本地的缓存库中，并没有提交到远程库中。<br>提交时必须填写日志文件，git默认不允许日志为空。<br>commit时可以看到本地有改动的文件，双击可以看到详细的修改。</p>
+</li>
+<li><p>push，推送<br>推送是把本地的代码推送到远端的库中，当远端版本比本地版本更高的时候会提示要先更新才允许推送。</p>
+</li>
+</ul>
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><ul>
+<li>有关分支，待我大成再做阐述。</li>
+</ul>
+</div><div class="tags"><a href="/tags/git/">git</a><a href="/tags/github/">github</a><a href="/tags/coding/">coding</a><a href="/tags/ssh/">ssh</a><a href="/tags/版本控制/">版本控制</a><a href="/tags/分布式/">分布式</a></div><div class="post-nav"><a href="/2017/04/10/使用HTML5的drag方法的一个小demo/" class="pre">使用HTML5的drag方法的一个小demo</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="widget"><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="请输入关键字..."/></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML5/">HTML5</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tips/">tips</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a><span class="category-list-count">2</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/HTML5/" style="font-size: 15px;">HTML5</a> <a href="/tags/drag/" style="font-size: 15px;">drag</a> <a href="/tags/draggable/" style="font-size: 15px;">draggable</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/bug/" style="font-size: 15px;">bug</a> <a href="/tags/input标签/" style="font-size: 15px;">input标签</a> <a href="/tags/空隙/" style="font-size: 15px;">空隙</a> <a href="/tags/coding/" style="font-size: 15px;">coding</a> <a href="/tags/ssh/" style="font-size: 15px;">ssh</a> <a href="/tags/版本控制/" style="font-size: 15px;">版本控制</a> <a href="/tags/分布式/" style="font-size: 15px;">分布式</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-fei"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Git安装、使用/">Git安装、使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/10/使用HTML5的drag方法的一个小demo/">使用HTML5的drag方法的一个小demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/webpack入门（二）/">webpack入门（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/webpack入门（一）/">webpack入门（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/span中的input标签上面有几个小像素空隙/">span中的input标签上面有几个小像素空隙</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/如何使用-hexo-git-创建自己的博客/">如何使用 hexo + git 创建自己的博客</a></li></ul></div></div></div></div><a id="totop" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.3.0" async></script><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">网站地图</a> |<a href="/atom.xml">订阅本站</a> |<span>联系博主：<a href="mailto:yanchongshan8@foxmail.com" target="_blank" class="fa fa-email"> </a><a href="undefined" target="_blank" class="fa fa-weibo"></a><a href="https://github.com/Palenew" target="_blank" class="fa fa-github"> </a></span></p><p><span> Copyright &copy;<a href="/." rel="nofollow">Palenew</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span><span><a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> Theme </a>by<a rel="nofollow" target="_blank" href="https://github.com/chaooo"> Charles.</a></span></p></div></div></div><script type="text/javascript" src="/js/search.json.js?v=1.3.0"></script></body></html>
