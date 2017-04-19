@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="Palenew的博客"><meta name="keywords" content="blog, javascript, Palenew, pale_blue"><title>Unicode-控制字符 | Welcome to My Blog</title><link rel="stylesheet" type="text/css" href="//fonts.css.network/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.3.0"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=1.3.0"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Unicode-控制字符</h1><a id="logo" href="/.">Welcome to My Blog</a><p class="description">by Palenew</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">Unicode-控制字符</h1><div class="post-meta">Apr 19, 2017<span> | </span><span class="category"><a href="/categories/tips小技巧/">tips小技巧</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><p>很久前就发现有个Q群好友的id在手机没有点开群，预览的时候是反着的。这两天有人问了下是加了“神秘代码”，去查了下，原来是<strong>Unicode-控制字符</strong>搞得鬼。</p>
+<h3 id="Unicode-控制字符"><a href="#Unicode-控制字符" class="headerlink" title="Unicode-控制字符"></a>Unicode-控制字符</h3><ul>
+<li><code>&amp;#8206;</code>LRM‎</li>
+<li><code>&amp;#8207;</code>RLM</li>
+<li><code>&amp;#8205;</code>ZWJ‍</li>
+<li><code>&amp;#8204;</code>ZWNJ‌</li>
+<li><code>&amp;#8234;</code>LRE‪</li>
+<li><code>&amp;#8237;</code>LRO‭</li>
+<li><code>&amp;#8238;</code>RLO</li>
+<li><code>&amp;#8236;</code>PDF‬</li>
+<li><code>&amp;#8302;</code>NADS⁮</li>
+<li><code>&amp;#8303;</code>NODS⁯</li>
+<li><code>&amp;#8299;</code>ASS⁫</li>
+<li><code>&amp;#8298;</code>ISS⁪</li>
+<li><code>&amp;#8301;</code>AAFS⁭</li>
+<li><code>&amp;#8300;</code>IAFS⁬</li>
+<li><code>&amp;#30;</code>RS </li>
+<li><code>&amp;#31;</code>US<br>当然，也可以用16进制表示，如让文本实现反向排列的RLO对应的&#8238;等同于&#x202E;<br>让前面运算法则结束的字符PDF是&#8236;等于&#x202C;</li>
+</ul>
+<h3 id="Unicode-控制字符-解释"><a href="#Unicode-控制字符-解释" class="headerlink" title="Unicode-控制字符 解释"></a>Unicode-控制字符 解释</h3><ul>
+<li><p>左到右标记 (LRM)<br>操作时很象从左到右字符，只是它不显示。LRM 没有任何其它语义效果。</p>
+</li>
+<li><p>从右到左标记 (RLM)<br>操作时很象从右到左字符，只是它不显示。RLM 没有任何其它语义效果。</p>
+</li>
+<li><p>零宽度联接器 (ZWJ)<br>防止连续字符在输出上联接。</p>
+</li>
+<li><p>零宽度非联接器 (ZWNJ)<br>在两个字符间添加非联接器，防止这两个字符在映射时连接草率。</p>
+</li>
+<li><p>启动从左到右的嵌套 (LRE)<br>表示将从左到右嵌套一些文本。例如， 阿拉伯句子中间的英文引用语可被标记为从左到右的嵌套文本。（LRE 影响单词顺序，不影响字符顺序。）</p>
+</li>
+<li><p>启动从右到左的嵌套 (RLE)<br>表示将从右到左嵌套一些文本。例如，英语引用语中间的希伯来短语可被标记为从右到左的嵌套文本。（RLE 影响单词顺序，不影响字符顺序。）</p>
+</li>
+<li><p>启动从左到右的优先 (LRO)<br>当需要用于特殊情况（例如，用于部件编号）时，优先于双向字符类型。LRO 强制字符成为从左到右的字符。</p>
+</li>
+<li><p>启动从右到左的优先 (RLO)<br>当需要用于特殊情况（例如，用于部件编号）时，优先于双向字符类型。RLO 强制字符成为从右到左的字符。</p>
+</li>
+<li><p>Pop 直接格式化 (PDF)<br>终止上一个显式代码的效果（嵌套或优先），并将双向状态恢复到在上一个 LRE、RLE、RLO 或 LRO 控制字符之前的状态。</p>
+</li>
+<li><p>国家（地区）数字形状替代 (NADS)<br>使用国家（地区）数字形状显示 U+0030-U+0039（ASCII 数字）。国家（地区）数字形状由当前用户的区域设置决定。</p>
+</li>
+<li><p>名义（欧洲）数字形状 (NODS)<br>使用名义数字形状显示 U+0030-U+0039（ASCII 数字）。名义数字形状是欧洲数字。</p>
+</li>
+<li><p>激活对称交换 (ASS)<br>表示是否应该将成对的字符名中的 LEFT 或 RIGHT 分别解释为有意义的打开或关闭。（默认状态是激活。）</p>
+</li>
+<li><p>禁止对称交换 (ISS)<br>关闭象圆括号这样的字符的对称交换，这样其左边和右边能继续表明向左和向右的朝向， 与打开对称交换时的打开和关闭状态相反。</p>
+</li>
+<li><p>激活阿拉伯成形 (AAFS)<br>控制阿拉伯兼容性字符的成形行为。在显示过程中，某些字母形式可能以草率的连接或者连字狐线的方式联接起来。成形选择器代码表示用于获得显示效果的字符形状确定（glyph 选择）过程是处于激活还是禁止状态。（默认状态为禁止。）</p>
+</li>
+<li><p>禁止阿拉伯成形 (IAFS)<br>禁止字符成形确定过程， 这样字符不会根据位置而成形。</p>
+</li>
+<li><p>记录分隔符（块分隔符） (RS)<br>在每个行分隔符后开始新的行。</p>
+</li>
+<li><p>US Unit Separator (Segment Separator)<br>每个段分隔符后开始新的段。</p>
+</li>
+</ul>
+<p>拿去尝试装逼吧。【你可能需要先用记事本，把这个字符打出来，然后copy到QQ的昵称栏】</p>
+</div><div class="tags"><a href="/tags/Unicode，控制字符/">Unicode，控制字符</a></div><div class="post-nav"><a href="/2017/04/12/Git安装、使用/" class="pre">Git安装、使用</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="widget"><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="请输入关键字..."/></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML5/">HTML5</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tips小技巧/">tips小技巧</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/webpack/">webpack</a><span class="category-list-count">2</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/github/" style="font-size: 15px;">github</a> <a href="/tags/Unicode，控制字符/" style="font-size: 15px;">Unicode，控制字符</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/HTML5/" style="font-size: 15px;">HTML5</a> <a href="/tags/drag/" style="font-size: 15px;">drag</a> <a href="/tags/draggable/" style="font-size: 15px;">draggable</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/coding/" style="font-size: 15px;">coding</a> <a href="/tags/ssh/" style="font-size: 15px;">ssh</a> <a href="/tags/版本控制/" style="font-size: 15px;">版本控制</a> <a href="/tags/分布式/" style="font-size: 15px;">分布式</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/bug/" style="font-size: 15px;">bug</a> <a href="/tags/input标签/" style="font-size: 15px;">input标签</a> <a href="/tags/空隙/" style="font-size: 15px;">空隙</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-fei"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/04/19/Unicode-控制字符/">Unicode-控制字符</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/Git安装、使用/">Git安装、使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/10/使用HTML5的drag方法的一个小demo/">使用HTML5的drag方法的一个小demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/webpack入门（二）/">webpack入门（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/webpack入门（一）/">webpack入门（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/span中的input标签上面有几个小像素空隙/">span中的input标签上面有几个小像素空隙</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/06/如何使用-hexo-git-创建自己的博客/">如何使用 hexo + git 创建自己的博客</a></li></ul></div></div></div></div><a id="totop" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.3.0" async></script><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">网站地图</a> |<a href="/atom.xml">订阅本站</a> |<span>联系博主：<a href="mailto:yanchongshan8@foxmail.com" target="_blank" class="fa fa-email"> </a><a href="undefined" target="_blank" class="fa fa-weibo"></a><a href="https://github.com/Palenew" target="_blank" class="fa fa-github"> </a></span></p><p><span> Copyright &copy;<a href="/." rel="nofollow">Palenew</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span><span><a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> Theme </a>by<a rel="nofollow" target="_blank" href="https://github.com/chaooo"> Charles.</a></span></p></div></div></div><script type="text/javascript" src="/js/search.json.js?v=1.3.0"></script></body></html>
