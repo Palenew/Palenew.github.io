@@ -1047,8 +1047,7 @@ body {
   padding-left: 0.15em;
 }
 .readmore a:hover {
-  -webkit-box-shadow: 0 -1px 4px #5483b1 inset;
-  box-shadow: 0 -1px 4px #5483b1 inset;
+  color: #1d3e81;
 }
 /* post navigator*/
 .post-nav {
